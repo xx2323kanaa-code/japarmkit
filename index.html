@@ -232,110 +232,78 @@ pre { white-space:pre-wrap; }
   
 </style>
 </head>
-
 <body>
-<div id="container">
+  <div id="container">
 
-  <div id="titleBar">
-  <div id="titleStack">
-    <div class="t1">HALLO</div>
-    <div class="t2">Myoelectric prosthesis training prototype: body alignment + slow voice/manual control.</div>
-    <div id="pill">Ready</div>
-  </div>
-
-  <!-- MENU (moved into title bar so it never gets hidden by pill) -->
-  <div id="menuWrapper">
-    <button id="menuToggle">☰</button>
-    <div id="menuPanel" class="hidden">
-
-      <div class="menu-section">
-        <h3>Camera</h3>
-        <select id="cameraFacing">
-          <option value="environment">Back</option>
-          <option value="user">Front</option>
-        </select>
+    <div id="titleBar">
+      <div id="titleStack">
+        <div class="t1">HALLO</div>
+        <div class="t2">Myoelectric prosthesis training prototype: body alignment + slow voice/manual control.</div>
+<div id="pill">Ready</div>
       </div>
 
-      <div class="menu-section">
-        <h3>Amputation side (yellow)</h3>
-        <select id="ampSide">
-          <option value="left">Left</option>
-          <option value="right">Right</option>
-        </select>
-      </div>
+    
 
-      <div class="menu-section">
-        <h3>Course</h3>
-        <button class="menuBtn" id="btnBeginner">Beginner</button>
-        <button class="menuBtn" id="btnIntermediate" style="margin-top:6px;">Intermediate</button>
-      </div>
+      <!-- MENU (moved into title bar so it never gets hidden by pill) -->
+      <div id="menuWrapper">
+        <button id="menuToggle">☰</button>
 
-      <div class="menu-section">
-        <h3>Debug</h3>
-        <button class="menuBtn" id="btnDebug">Toggle DEBUG HUD</button>
-      </div>
+        <div id="menuPanel" class="hidden">
+          <div class="menu-section">
+            <h3>Camera</h3>
+            <select id="cameraFacing">
+              <option value="environment">Back</option>
+              <option value="user">Front</option>
+            </select>
+          </div>
 
-    </div>
-  </div>
-</div>
+          <div class="menu-section">
+            <h3>Amputation side (yellow)</h3>
+            <select id="ampSide">
+              <option value="left">Left</option>
+              <option value="right">Right</option>
+            </select>
+          </div>
 
+          <div class="menu-section">
+            <h3>Course</h3>
+            <button class="menuBtn" id="btnBeginner">Beginner</button>
+            <button class="menuBtn" id="btnIntermediate" style="margin-top:6px;">Intermediate</button>
+          </div>
 
-  <video id="video" autoplay muted playsinline></video>
-  <canvas id="overlay"></canvas>
-
-  <!-- MENU -->
-  
-      <div class="menu-section">
-        <h3>Camera</h3>
-        <select id="cameraFacing">
-          <option value="environment">Back</option>
-          <option value="user">Front</option>
-        </select>
-      </div>
-
-      <div class="menu-section">
-        <h3>Amputation side (yellow)</h3>
-        <select id="ampSide">
-          <option value="left">Left</option>
-          <option value="right">Right</option>
-        </select>
-      </div>
-
-      <div class="menu-section">
-        <h3>Course</h3>
-        <button class="menuBtn" id="btnBeginner">Beginner</button>
-        <button class="menuBtn" id="btnIntermediate" style="margin-top:6px;">Intermediate</button>
-      </div>
-
-      <div class="menu-section">
-        <h3>Debug</h3>
-        <button class="menuBtn" id="btnDebug">Toggle DEBUG HUD</button>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- COURSE PANEL -->
-  <div id="coursePanel" class="hidden">
-    <div id="courseTitle"></div>
-    <div id="courseText"></div>
-    <div id="courseBody"></div>
-  </div>
-
-  <!-- DEBUG HUD -->
-  <div id="debugHud" class="hidden">
-    <div id="debugHudHeader">
-      <strong>DEBUG HUD (device / camera / voice)</strong>
-      <div class="btns">
-        <button id="hudCopy">Copy</button>
-        <button id="hudLog">Log</button>
-        <button id="hudClose">Close</button>
+          <div class="menu-section">
+            <h3>Debug</h3>
+            <button class="menuBtn" id="btnDebug">Toggle DEBUG HUD</button>
+          </div>
+        </div>
       </div>
     </div>
-    <pre id="debugText"></pre>
-  </div>
 
-</div>
+    <video id="video" autoplay muted playsinline></video>
+    <canvas id="overlay"></canvas>
+
+    <!-- COURSE PANEL -->
+    <div id="coursePanel" class="hidden">
+      <div id="courseTitle"></div>
+      <div id="courseText"></div>
+      <div id="courseBody"></div>
+    </div>
+
+    <!-- DEBUG HUD -->
+    <div id="debugHud" class="hidden">
+      <div id="debugHudHeader">
+        <strong>DEBUG HUD (device / camera / voice)</strong>
+        <div class="btns">
+          <button id="hudCopy">Copy</button>
+          <button id="hudLog">Log</button>
+          <button id="hudClose">Close</button>
+        </div>
+      </div>
+      <pre id="debugText"></pre>
+    </div>
+
+  </div>
+</body>
 
 <script>
 /* ===================== MENU ===================== */
@@ -527,21 +495,22 @@ btnIntermediate.onclick=()=>{
   lastIntent='-';
 
   courseTitle.textContent="Intermediate course";
-  courseText.innerHTML=
-    `Speak slowly in a quiet place while watching the screen.<br>
-     You can also use manual buttons to verify behavior.<br>
-     <b>ONE / BICEPS / ぐー</b> → flex + close (amputated side only)<br>
-<b>TWO / TRICEPS / GO / ぱー</b> → extend + open (amputated side only)
+courseText.innerHTML =
+  `Speak slowly in a quiet place while watching the screen.<br>
+   You can also use manual buttons to verify behavior.<br>
+   <b>ONE / BICEPS / ぐー</b> → flex + close (amputated side only)<br>
+   <b>TWO / TRICEPS / GO / ぱー</b> → extend + open (amputated side only)`;
 
-  // MUST keep 1/2 buttons (regression fix)
-  courseBody.innerHTML=
-    `<div id="manualRow">
-       <button id="btn1">1 (Biceps / Close)</button>
-       <button id="btn2">2 (Triceps / Open)</button>
-       <div class="note">Manual buttons are for validation. Voice should match exactly.</div>
-     </div>
-     <div class="checkbox"><label><input type="checkbox"> I will perform slowly while watching the screen.</label></div>`;
-
+courseBody.innerHTML =
+  `<div id="manualRow">
+     <button id="btn1">1 (Biceps / Close)</button>
+     <button id="btn2">2 (Triceps / Open)</button>
+     <div class="note">Manual buttons are for validation. Voice should match exactly.</div>
+   </div>
+   <div class="checkbox">
+     <label><input type="checkbox"> I will perform slowly while watching the screen.</label>
+   </div>`;
+  
   coursePanel.classList.remove('hidden');
   menuPanel.classList.add('hidden');
 
